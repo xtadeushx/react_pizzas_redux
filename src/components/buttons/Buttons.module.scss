@@ -1,0 +1,24 @@
+.root {
+	display: flex;
+	width: 100px;
+}
+
+.button {
+	padding: 3px 10px;
+	background-color: #ffdf8c;
+	border: 1px solid #ffdf8c;
+	font-size: 18px;
+	border-radius: 10px;
+	cursor: pointer;
+	color: white;
+	margin-right: 5px;
+
+	&:disabled {
+		background-color: #cac6c5;
+		border: 1px solid #cac6c5;
+	}
+}
+.active {
+	background-color: #fe5f1e;
+	border: 1px solid #fe5f1e;
+}
