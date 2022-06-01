@@ -1,12 +1,10 @@
-import React, { useContext } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React from 'react';
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import LogoImg from '../../assets/img/pizza-logo.svg';
-import { Context } from '../../context';
 import Buttons from '../buttons';
 
 function Header() {
-	// const { isUkraine, setIsUkraine } = useContext(Context);
 	// redux
 	const { isUkraine } = useSelector((state) => state.language);
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch} from 'react-redux';
 
 import { handelChangeLanguage } from '../../redux/slices/languageSlice';
 import styles from './Buttons.module.scss';

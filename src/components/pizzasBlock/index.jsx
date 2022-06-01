@@ -1,7 +1,6 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { v4 as uuidv4 } from 'uuid';
-import { Context } from '../../context';
 import styles from './PizzasBlock.module.scss';
 
 const pizzasTypesRus = ['тонкое', 'традиционное', 'толстое'];

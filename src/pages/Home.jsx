@@ -5,17 +5,11 @@ import Categories from '../components/categories';
 import PizzasBlock from '../components/pizzasBlock';
 import Skeleton from '../components/sceleton';
 import Sort from '../components/sort';
-import { Context } from '../context';
-
-import pizzasFromJSON from '../pizzas.json';
 
 const URL = 'https://628e644ea339dfef87ad6fce.mockapi.io/pizzas';
 const URL_UKR = 'https://628e644ea339dfef87ad6fce.mockapi.io/pizzas_ukr';
 
 function Home() {
-	//Context
-	// const { isUkraine, setIsUkraine } = useContext(Context);
-
 	//Redux
 	const { isUkraine } = useSelector((state) => state.language);
 	//State
