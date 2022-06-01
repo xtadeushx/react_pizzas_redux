@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import Categories from '../components/categories';
 
 import PizzasBlock from '../components/pizzasBlock';
@@ -13,7 +14,10 @@ const URL_UKR = 'https://628e644ea339dfef87ad6fce.mockapi.io/pizzas_ukr';
 
 function Home() {
 	//Context
-	const { isUkraine, setIsUkraine } = useContext(Context);
+	// const { isUkraine, setIsUkraine } = useContext(Context);
+
+	//Redux
+	const { isUkraine } = useSelector((state) => state.language);
 	//State
 	const [categoriesById, setCategoriesById] = useState(0);
 
@@ -39,8 +43,16 @@ function Home() {
 		<>
 			<div className='container'>
 				<div className='content__top'>
-					<Categories categoriesById={categoriesById} handleChangeCategory={handleChangeCategory} />
-					<Sort sortType={sortType} handleChangeSortType={handleChangeSortType} />
+					<Categories
+						categoriesById={categoriesById}
+						handleChangeCategory={handleChangeCategory}
+						isUkraine={isUkraine}
+					/>
+					<Sort
+						sortType={sortType}
+						handleChangeSortType={handleChangeSortType}
+						isUkraine={isUkraine}
+					/>
 				</div>
 				<h2 className='content__title'>{isUkraine ? 'Усі піци ​​💙💛🇺🇦​' : 'Все пиццы ​🌊​🚢​'}</h2>
 				<div className='content__items'>

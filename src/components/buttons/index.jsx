@@ -1,18 +1,23 @@
 import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+
+import { handelChangeLanguage } from '../../redux/slices/languageSlice';
 import styles from './Buttons.module.scss';
 
-function Buttons({ isUkraine, setIsUkraine }) {
+function Buttons({ isUkraine }) {
+	const dispatch = useDispatch();
+	const changeLanguage = () => dispatch(handelChangeLanguage(isUkraine));
 	return (
 		<div className='root'>
 			<div className='button__wrapper'>
 				<button
 					className={`button_lgn ${!isUkraine ? 'active__btn' : ''}`}
-					onClick={() => setIsUkraine((prev) => !prev)}>
+					onClick={() => changeLanguage()}>
 					ru
 				</button>
 				<button
 					className={`button_lgn ${isUkraine ? 'active__btn' : ''}`}
-					onClick={() => setIsUkraine((prev) => !prev)}>
+					onClick={() => changeLanguage()}>
 					ukr
 				</button>
 			</div>
