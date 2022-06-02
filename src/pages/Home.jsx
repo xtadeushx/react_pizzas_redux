@@ -1,21 +1,19 @@
 import React, { useContext, useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import Categories from '../components/categories';
 
 import PizzasBlock from '../components/pizzasBlock';
 import Skeleton from '../components/sceleton';
 import Sort from '../components/sort';
-import { Context } from '../context';
-
-import pizzasFromJSON from '../pizzas.json';
 
 const URL = 'https://628e644ea339dfef87ad6fce.mockapi.io/pizzas';
 const URL_UKR = 'https://628e644ea339dfef87ad6fce.mockapi.io/pizzas_ukr';
 
 function Home() {
-  //Context
-  const { isUkraine, setIsUkraine } = useContext(Context);
-  //State
-  const [categoriesById, setCategoriesById] = useState(0);
+	//Redux
+	const { isUkraine } = useSelector((state) => state.language);
+	//State
+	const [categoriesById, setCategoriesById] = useState(0);
 
   const [sortType, setSortType] = useState({ name: 'популярности (A-Z)', sortProperty: 'rating' });
   const [pizzas, setPizzas] = useState([]);
@@ -35,7 +33,7 @@ function Home() {
           setIsLoading(false);
         }, 3000);
       });
-  }, [categoriesById, sortType]);
+  }, [categoriesById, sortType, categoriesById]);
 
   const handleChangeCategory = (id) => setCategoriesById(id);
   const handleChangeSortType = (obj) => setSortType(obj);
