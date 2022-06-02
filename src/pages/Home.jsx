@@ -41,13 +41,13 @@ function Home() {
     <>
       <div className="container">
         <div className="content__top">
-          <Categories categoriesById={categoriesById} handleChangeCategory={handleChangeCategory} />
-          <Sort sortType={sortType} handleChangeSortType={handleChangeSortType} />
+          <Categories isUkraine={isUkraine} categoriesById={categoriesById} handleChangeCategory={handleChangeCategory} />
+          <Sort isUkraine={isUkraine} sortType={sortType} handleChangeSortType={handleChangeSortType} />
         </div>
         <h2 className="content__title">{isUkraine ? 'Усі піци ​​💙💛🇺🇦​' : 'Все пиццы ​🌊​🚢​'}</h2>
         <div className="content__items">
           {isLoading
-            ? [...new Array(9)].map((_, index) => <Skeleton key={index} />)
+            ? [...new Array(pizzas.length)].map((_, index) => <Skeleton key={index} />)
             : pizzas.map((pizza) => <PizzasBlock key={pizza.id} {...pizza} />)}
         </div>
       </div>
