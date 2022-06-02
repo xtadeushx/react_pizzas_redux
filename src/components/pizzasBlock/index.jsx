@@ -1,7 +1,8 @@
 import React, { useContext, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { v4 as uuidv4 } from 'uuid';
 import { Context } from '../../context';
+import { addToCart } from '../../redux/slices/cartSlice';
 import styles from './PizzasBlock.module.scss';
 
 const pizzasTypesRus = ['тонкое', 'традиционное', 'толстое'];
@@ -10,12 +11,14 @@ const pizzasTypesUkr = ['тонке', 'традиційне', 'товсте'];
 function PizzasBlock({ id, imageUrl, title, types, sizes, price }) {
   //State
   const [pizzasCount, setPizzasCount] = useState(0);
-  const [isActiveSize, setSsActiveSize] = useState(0);
+  const [isActiveSize, setActiveSize] = useState(0);
   const [isActiveType, setIsActiveType] = useState(0);
   //Use context
   // const { isUkraine } = useContext(Context);
   //Redux
   const { isUkraine } = useSelector((state) => state.language);
+  const { cartValue } = useSelector((state) => state.cart);
+  const dispatch = useDispatch();
 
   //   const {cartItems, setCartItems} = useContext(Context)
 
@@ -44,7 +47,7 @@ function PizzasBlock({ id, imageUrl, title, types, sizes, price }) {
             {types.map((type, index) => (
               <li
                 className={isActiveType === index ? 'active' : ''}
-                onClick={() => setIsActiveType(index)}
+                onClick={() => setActiveSize(index)}
                 key={uuidv4()}>
                 {isUkraine ? pizzasTypesUkr[type] : pizzasTypesRus[type]}
               </li>
@@ -55,7 +58,7 @@ function PizzasBlock({ id, imageUrl, title, types, sizes, price }) {
             {sizes.map((item, index) => (
               <li
                 className={isActiveSize === index ? 'active' : ''}
-                onClick={() => setSsActiveSize(index)}
+                onClick={() => setActiveSize(index)}
                 key={uuidv4()}>
                 {item} см.
               </li>
@@ -67,8 +70,11 @@ function PizzasBlock({ id, imageUrl, title, types, sizes, price }) {
             {isUkraine ? 'від' : 'от'} {price} {isUkraine ? '₴' : '₽'}
           </div>
           <div
-            onClick={() => setPizzasCount((prev) => prev + 1)}
-            className="button button--outline button--add">
+            className="button button--outline button--add"
+            onClick={() => {
+              dispatch(addToCart({ id, title, imageUrl, price, pizzasCount, isActiveSize, isActiveSize }));
+              setPizzasCount((prev) => prev + 1);
+            }}>
             <svg
               width="12"
               height="12"
