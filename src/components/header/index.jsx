@@ -22,7 +22,7 @@ function Header() {
 						</div>
 					</div>
 				</Link>
-				<div className='box'>
+				<div className='box' style={{display:'flex'}}>
 					<Buttons isUkraine={isUkraine} setIsUkraine={setIsUkraine} />
 					<div className='header__cart'>
 						<Link to='/cart' className='button button--cart'>

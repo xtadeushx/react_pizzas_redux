@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
+import styles from './Sort.module.scss';
 
 const sortName = [
 	{ name: 'популярности (A-Z)', sortProperty: 'rating' },
@@ -35,7 +36,7 @@ function Sort({ sortType, handleChangeSortType }) {
 				<span onClick={() => handleToggleVisible()}>{sortType.name}</span>
 			</div>
 			<div className='sort__popup'>
-				<ul className={isSHow ? 'hide' : ''}>
+				<ul className={!isSHow ? styles.hide : ''}>
 					{sortName.map((item, index) => (
 						<li
 							key={uuidv4()}
