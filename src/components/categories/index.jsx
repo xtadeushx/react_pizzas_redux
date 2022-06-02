@@ -1,16 +1,15 @@
 import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { v4 as uuidv4 } from 'uuid';
+import { changeCategory } from '../../redux/slices/filterSlice';
 
-function Categories({ categoriesById, handleChangeCategory, isUkraine }) {
-  const categoriesRu = ['Все', 'Мясные 🥩', 'Вегетарианская 🌱', 'Гриль', 'Острые', 'Закрытые'];
-  const categoriesUa = [
-    'Всі',
-    "М'ясні 🥩",
-    'Вегетаріанська 🌱',
-    'Гриль (BBQ)',
-    'Гострі',
-    'Закриті',
-  ];
+const categoriesRu = ['Все', 'Мясные 🥩', 'Вегетарианская 🌱', 'Гриль', 'Острые', 'Закрытые'];
+const categoriesUa = ['Всі', "М'ясні 🥩", 'Вегетаріанська 🌱', 'Гриль (BBQ)', 'Гострі', 'Закриті'];
+
+function Categories({ isUkraine }) {
+  const { categoryId } = useSelector((state) => state.filter);
+  const dispatch = useDispatch();
+
   const categories = isUkraine ? categoriesUa : categoriesRu;
 
   return (
@@ -18,9 +17,9 @@ function Categories({ categoriesById, handleChangeCategory, isUkraine }) {
       <ul>
         {categories.map((category, index) => (
           <li
-            className={categoriesById === index ? 'active' : ''}
+            className={categoryId === index ? 'active' : ''}
             key={uuidv4()}
-            onClick={() => handleChangeCategory(index)}>
+            onClick={() => dispatch(changeCategory(index))}>
             {category}
           </li>
         ))}

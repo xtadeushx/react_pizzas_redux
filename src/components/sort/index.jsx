@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { v4 as uuidv4 } from 'uuid';
+import { sortCategory } from '../../redux/slices/filterSlice';
 import styles from './Sort.module.scss';
 
 const sortNameRu = [
@@ -19,8 +21,10 @@ const sortNameUa = [
 	{ name: 'алфавіту (Z-A)', sortProperty: '-category' },
 ];
 
-function Sort({ sortType, handleChangeSortType, isUkraine }) {
-	const [isSHow, setIsShow] = useState(true);
+function Sort({ isUkraine }) {
+	const {sortType} = useSelector(state=> state.filter);
+	const dispatch = useDispatch();
+	const [isSHow, setIsShow] = useState(false);
 	const sortName = isUkraine ? sortNameUa : sortNameRu;
 	const handleToggleVisible = () => {
 		setIsShow((prev) => !prev);
@@ -49,7 +53,7 @@ function Sort({ sortType, handleChangeSortType, isUkraine }) {
 						<li
 							key={uuidv4()}
 							onClick={() => {
-								handleChangeSortType(item);
+								dispatch(sortCategory(item));
 								handleToggleVisible();
 							}}>
 							{item.name}
