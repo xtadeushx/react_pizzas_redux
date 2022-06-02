@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import LogoImg from '../../assets/img/pizza-logo.svg';
 import Buttons from '../buttons';
+import Search from '../search/idex';
 import styles from './Header.module.scss'
 
 function Header() {
@@ -24,6 +25,7 @@ function Header() {
 						</div>
 					</div>
 				</Link>
+				<Search/>
 				<div className={styles.box}>
 					<Buttons isUkraine={isUkraine} />
 					<div className='header__cart'>

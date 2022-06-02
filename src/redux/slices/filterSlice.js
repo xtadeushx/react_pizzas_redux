@@ -1,9 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
 
+
 let initialState = {
   categoryId: 0,
-  sortType: {
-    name: 'популярность',
+  sortType:   {
+    name:'популярність (A-Z)',
     sortProperty: 'rating',
   },
 };
