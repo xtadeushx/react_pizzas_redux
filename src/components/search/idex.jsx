@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useContext, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
+import { Context } from '../../context';
 import styles from './Search.module.scss';
 
 const languageSearch = {
@@ -8,7 +9,11 @@ const languageSearch = {
 };
 
 function Search() {
-    const {isUkraine} = useSelector(state=> state.language)
+  const { isUkraine } = useSelector((state) => state.language);
+  // const [searchValue, setInputValue] = useState('');
+  const {searchValue, setInputValue} = useContext(Context);
+  const input = useRef();
+  const handleChangeInputValue = () => setInputValue(input.current.value);
   return (
     <div className={styles.root}>
       <svg className={styles.search} viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -17,10 +22,18 @@ function Search() {
           <path d="M18,10a8,8,0,1,0-3.1,6.31l6.4,6.4,1.41-1.41-6.4-6.4A8,8,0,0,0,18,10Zm-8,6a6,6,0,1,1,6-6A6,6,0,0,1,10,16Z" />
         </g>
       </svg>
-      <input type="text" className={styles.input} placeholder={isUkraine?languageSearch.ua:languageSearch.ru} />
+      <input
+        type="text"
+        className={styles.input}
+        placeholder={isUkraine ? languageSearch.ua : languageSearch.ru}
+        value={searchValue}
+        onChange={() => handleChangeInputValue()}
+        ref={input}
+      />
 
-      <svg
+      {searchValue && <svg
         className={styles.close}
+        onClick = {() => setInputValue('')}
         enableBackground="new 0 0 32 32"
         height="32px"
         id="Слой_1"
@@ -39,7 +52,7 @@ function Search() {
         <g />
         <g />
         <g />
-      </svg>
+      </svg>}
     </div>
   );
 }
