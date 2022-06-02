@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
-const sortName = [
+const sortNameRu = [
 	{ name: 'популярности (A-Z)', sortProperty: 'rating' },
 	{ name: 'популярности (Z-A)', sortProperty: '-rating' },
 	{ name: 'цене (A-Z)', sortProperty: 'price' },
@@ -9,10 +9,18 @@ const sortName = [
 	{ name: 'алфавиту (A-Z)', sortProperty: 'category' },
 	{ name: 'алфавиту (Z-A)', sortProperty: '-category' },
 ];
+const sortNameUa = [
+	{ name: 'популярності (A-Z)', sortProperty: 'rating' },
+	{ name: 'популярності (Z-A)', sortProperty: '-rating' },
+	{ name: 'ціні (A-Z)', sortProperty: 'price' },
+	{ name: 'ціні (Z-A)', sortProperty: '-price' },
+	{ name: 'алфавіту (A-Z)', sortProperty: 'category' },
+	{ name: 'алфавіту (Z-A)', sortProperty: '-category' },
+];
 
-function Sort({ sortType, handleChangeSortType }) {
+function Sort({ sortType, handleChangeSortType, isUkraine }) {
 	const [isSHow, setIsShow] = useState(true);
-
+	const sortName = isUkraine ? sortNameUa : sortNameRu;
 	const handleToggleVisible = () => {
 		setIsShow((prev) => !prev);
 	};

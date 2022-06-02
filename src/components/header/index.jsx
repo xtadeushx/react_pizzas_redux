@@ -1,11 +1,12 @@
-import React, { useContext } from 'react';
+import React from 'react';
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import LogoImg from '../../assets/img/pizza-logo.svg';
-import { Context } from '../../context';
 import Buttons from '../buttons';
 
 function Header() {
-	const { isUkraine, setIsUkraine } = useContext(Context);
+	// redux
+	const { isUkraine } = useSelector((state) => state.language);
 
 	return (
 		<div className='header'>
@@ -23,7 +24,7 @@ function Header() {
 					</div>
 				</Link>
 				<div className='box'>
-					<Buttons isUkraine={isUkraine} setIsUkraine={setIsUkraine} />
+					<Buttons isUkraine={isUkraine} />
 					<div className='header__cart'>
 						<Link to='/cart' className='button button--cart'>
 							<span>520 {isUkraine ? '₴' : '₽'}</span>

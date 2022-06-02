@@ -1,6 +1,6 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
 import { v4 as uuidv4 } from 'uuid';
-import { Context } from '../../context';
 import styles from './PizzasBlock.module.scss';
 
 const pizzasTypesRus = ['тонкое', 'традиционное', 'толстое'];
@@ -12,7 +12,9 @@ function PizzasBlock({ id, imageUrl, title, types, sizes, price }) {
 	const [isActiveSize, setSsActiveSize] = useState(0);
 	const [isActiveType, setIsActiveType] = useState(0);
 	//Use context
-	const { isUkraine } = useContext(Context);
+	// const { isUkraine } = useContext(Context);
+	//Redux
+	const { isUkraine } = useSelector((state) => state.language);
 	return (
 		<>
 			<div className='pizza-block'>
