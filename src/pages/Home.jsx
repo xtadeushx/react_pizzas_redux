@@ -55,7 +55,7 @@ function Home() {
             ? [...new Array(pizzas.length || 6)].map((_, index) => <Skeleton key={index} />)
             : pizzas.map((pizza) => <PizzasBlock key={pizza.id} {...pizza} />)}
         </div>
-        <Pagination value={currentPage} onChangePage={onChangePage} />
+        <Pagination  onChangePage={onChangePage} />
       </div>
     </>
   );
