@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React, { useContext, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Categories from '../components/categories';
@@ -37,13 +38,13 @@ function Home() {
 
   useEffect(() => {
     setIsLoading(true);
-    fetch(`${isUkraine ? URL_UKR : URL}?${page}&${category}&sortBy=${sort}&order=${order}${search}`)
-      .then((response) => response.json())
-      .then((data) => {
-        setTimeout(() => {
-          setPizzas(data);
-          setIsLoading(false);
-        }, 1000);
+    axios
+      .get(
+        `${isUkraine ? URL_UKR : URL}?${page}&${category}&sortBy=${sort}&order=${order}${search}`,
+      )
+      .then((response) => {
+        setPizzas(response.data);
+        setIsLoading(false);
       });
   }, [categoryId, sortType, searchValue, currentPage, isUkraine]);
 
