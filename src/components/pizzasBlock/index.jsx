@@ -19,24 +19,6 @@ function PizzasBlock({ id, imageUrl, title, types, sizes, price }) {
   const { isUkraine } = useSelector((state) => state.language);
   const { cartValue } = useSelector((state) => state.cart);
   const dispatch = useDispatch();
-
-  //   const {cartItems, setCartItems} = useContext(Context)
-
-  //   const addItemsToCart = (url, title, description, pizzasCount=0,price=0) => {
-  //     setCartItems([
-  //       ...cartItems,
-  //       {
-  //         url,
-  //         title,
-  //         sum : pizzasCount * price,
-  //         count:pizzasCount +1,
-  //         description: {
-  //           type: description.isActiveType,
-  //           size: description.isActiveSize,
-  //         },
-  //       },
-  //     ]);
-  //   };
   return (
     <>
       <div className="pizza-block">
