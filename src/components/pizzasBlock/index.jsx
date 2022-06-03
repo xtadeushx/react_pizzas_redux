@@ -29,7 +29,7 @@ function PizzasBlock({ id, imageUrl, title, types, sizes, price }) {
             {types.map((type, index) => (
               <li
                 className={isActiveType === index ? 'active' : ''}
-                onClick={() => setActiveSize(index)}
+                onClick={() => setIsActiveType(index)}
                 key={uuidv4()}>
                 {isUkraine ? pizzasTypesUkr[type] : pizzasTypesRus[type]}
               </li>
@@ -54,7 +54,7 @@ function PizzasBlock({ id, imageUrl, title, types, sizes, price }) {
           <div
             className="button button--outline button--add"
             onClick={() => {
-              dispatch(addToCart({ id, title, imageUrl, price, pizzasCount, isActiveSize, isActiveSize }));
+              dispatch(addToCart({ id, title, imageUrl, price, pizzasCount, isActiveType, isActiveSize }));
               setPizzasCount((prev) => prev + 1);
             }}>
             <svg

@@ -2,13 +2,22 @@ import React, { useContext } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Context } from '../context';
-import { cleanCart } from '../redux/slices/cartSlice';
+import { cleanCart, removeItemFromCart, addToCart } from '../redux/slices/cartSlice';
 
 function Cart() {
   const { cartValue } = useSelector((state) => state.cart);
   const { isUkraine } = useSelector((state) => state.language);
   const dispatch = useDispatch();
   let totalBill = cartValue.map((item) => item.price).reduce((prev, value) => +prev + +value, 0);
+
+  const filterCart = (id) => {
+    dispatch(removeItemFromCart(id));
+  };
+
+  const pizzasTypesRus = ['тонкое', 'традиционное', 'толстое'];
+  const pizzasTypesUkr = ['тонке', 'традиційне', 'товсте'];
+
+  const sizes = [26, 30, 40];
 
   return (
     <>
@@ -83,11 +92,14 @@ function Cart() {
                 />
               </svg>
 
-              <span onClick={() => dispatch(cleanCart())}>{isUkraine ? 'Очистити кошик' : 'Очистить корзину'}</span>
+              <span onClick={() => dispatch(cleanCart())}>
+                {isUkraine ? 'Очистити кошик' : 'Очистить корзину'}
+              </span>
             </div>
           </div>
           <div className="content__items">
             {cartValue.map((item) => {
+              const { isActiveSize, isActiveType } = item;
               return (
                 <>
                   <div className="cart__item">
@@ -96,7 +108,9 @@ function Cart() {
                     </div>
                     <div className="cart__item-info">
                       <h3>{item.title}</h3>
-                      <p>тонкое тесто, 26 см.</p>
+                      <p>
+                        {pizzasTypesRus[isActiveType]}, {sizes[isActiveSize]} см.
+                      </p>
                     </div>
                     <div className="cart__item-count">
                       <div className="button button--outline button--circle cart__item-count-minus">
@@ -116,7 +130,7 @@ function Cart() {
                           />
                         </svg>
                       </div>
-                      <b>2</b>
+                      <b>{item.pizzasCount + 1}</b>
                       <div className="button button--outline button--circle cart__item-count-plus">
                         <svg
                           width="10"
@@ -141,7 +155,11 @@ function Cart() {
                       </b>
                     </div>
                     <div className="cart__item-remove">
-                      <div className="button button--outline button--circle">
+                      <div
+                        className="button button--outline button--circle"
+                        onClick={() => {
+                          filterCart(item.id);
+                        }}>
                         <svg
                           width="10"
                           height="10"
@@ -168,11 +186,14 @@ function Cart() {
             <div className="cart__bottom-details">
               <span>
                 {' '}
-				{isUkraine ? 'Усього піц:' : 'Всего пицц:'} <b>{cartValue.length} шт.</b>{' '}
+                {isUkraine ? 'Усього піц:' : 'Всего пицц:'} <b>{cartValue.length} шт.</b>{' '}
               </span>
               <span>
                 {' '}
-                {isUkraine ? 'Сума замовлення:' : 'Сумма заказа:'} <b>{totalBill} {isUkraine ? '₴' : '₽'}</b>{' '}
+                {isUkraine ? 'Сума замовлення:' : 'Сумма заказа:'}{' '}
+                <b>
+                  {totalBill} {isUkraine ? '₴' : '₽'}
+                </b>{' '}
               </span>
             </div>
             <div className="cart__bottom-buttons">
