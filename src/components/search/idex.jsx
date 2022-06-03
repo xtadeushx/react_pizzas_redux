@@ -22,7 +22,8 @@ function Search() {
   const updateSearchValue = useCallback(
     debounce((str) => {
       setInputValue(str);
-    }, 2000),
+      console.log(value);
+    }, 500),
     [],
   );
 
@@ -31,17 +32,14 @@ function Search() {
     updateSearchValue(value);
   };
 
-
   const onClear = () => {
     setValue('');
+    setInputValue('');
     input.current.focus();
   };
   return (
     <div className={styles.root}>
-      <svg
-        className={styles.search}
-        viewBox="0 0 24 24"
-        xmlns="http://www.w3.org/2000/svg">
+      <svg className={styles.search} viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
         <title />
         <g data-name="Layer 2" id="Layer_2">
           <path d="M18,10a8,8,0,1,0-3.1,6.31l6.4,6.4,1.41-1.41-6.4-6.4A8,8,0,0,0,18,10Zm-8,6a6,6,0,1,1,6-6A6,6,0,0,1,10,16Z" />
@@ -52,7 +50,7 @@ function Search() {
         className={styles.input}
         placeholder={isUkraine ? languageSearch.ua : languageSearch.ru}
         value={value}
-        onChange={()=> onChangeInput()}
+        onChange={onChangeInput}
         ref={input}
       />
 
