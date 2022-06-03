@@ -30,10 +30,11 @@ function Home() {
   const sort = sortType['sortProperty'].replace('-', '');
   const order = sortType.sortProperty.startsWith('-') ? 'desc' : 'asc';
   const search = searchValue ? `&search=${searchValue}` : '';
+  const page = `page=${currentPage}&limit=4`;
 
   useEffect(() => {
     setIsLoading(true);
-    fetch(`${isUkraine ? URL_UKR : URL}?page=${currentPage}&limit=4&${category}&sortBy=${sort}&order=${order}${search}`)
+    fetch(`${isUkraine ? URL_UKR : URL}?${page}&${category}&sortBy=${sort}&order=${order}${search}`)
       .then((response) => response.json())
       .then((data) => {
         setTimeout(() => {
@@ -41,7 +42,7 @@ function Home() {
           setIsLoading(false);
         }, 1000);
       });
-  }, [categoryId, sortType, searchValue, currentPage]);
+  }, [categoryId, sortType, searchValue, currentPage, isUkraine]);
 
 
 
