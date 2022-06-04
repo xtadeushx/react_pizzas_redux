@@ -30,7 +30,7 @@ function Sort({ isUkraine }) {
 						fill='#2C2C2C'
 					/>
 				</svg>
-				<b>Сортировка по:</b>
+				<b>{isUkraine ? 'Сортування по:' : 'Сортировка по:'}</b>
 				<span onClick={() => handleToggleVisible()}>{sortType.name}</span>
 			</div>
 			<div className='sort__popup'>

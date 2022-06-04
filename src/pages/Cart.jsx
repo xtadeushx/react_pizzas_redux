@@ -4,8 +4,8 @@ import { v4 as uuidv4 } from 'uuid';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import CartItem from '../components/cartItem';
-import { cleanCart} from '../redux/slices/cartSlice';
-import { CURRENT__CURRENCY } from '../pizzasType';
+import { cleanCart } from '../redux/slices/cartSlice';
+import { CART, CURRENT__CURRENCY } from '../pizzasType';
 
 function Cart() {
   const { cartValue } = useSelector((state) => state.cart);
@@ -13,9 +13,7 @@ function Cart() {
   const dispatch = useDispatch();
   let totalBill = cartValue.map((item) => item.price).reduce((prev, value) => +prev + +value, 0);
 
- 
-
-
+  const CheckIsUkraine = (arg1, arg2) => (isUkraine ? arg1 : arg2);
 
   return (
     <>
@@ -51,7 +49,7 @@ function Cart() {
                   strokeLinejoin="round"
                 />
               </svg>
-              Корзина
+              {CheckIsUkraine(CART.name.ua, CART.name.ru)}
             </h2>
             <div className="cart__clear">
               <svg
@@ -89,15 +87,15 @@ function Cart() {
                   strokeLinejoin="round"
                 />
               </svg>
-
               <span onClick={() => dispatch(cleanCart())}>
-                {isUkraine ? 'Очистити кошик' : 'Очистить корзину'}
+                {CheckIsUkraine(CART.clear.ua, CART.clear.ru)}
               </span>
             </div>
           </div>
           <div className="content__items">
-          {cartValue.map((item) =>    <CartItem key={uuidv4()}  {...item}/>)}
-      
+            {cartValue.map((item) => (
+              <CartItem key={uuidv4()} {...item} />
+            ))}
           </div>
           <div className="cart__bottom">
             <div className="cart__bottom-details">
