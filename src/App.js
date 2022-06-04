@@ -10,6 +10,7 @@ import Cart from './pages/Cart';
 import NotFoundPage from './pages/NotFoundPage';
 import CartEmpty from './pages/CartEmpty';
 
+
 function App() {
   const [searchValue, setInputValue] = useState('');
   const { cartValue } = useSelector((state) => state.cart);

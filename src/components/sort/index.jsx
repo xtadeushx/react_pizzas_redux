@@ -1,31 +1,17 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { v4 as uuidv4 } from 'uuid';
+import { SORT__NAME_RU, SORT__NAME_UA } from '../../pizzasType';
 import { sortCategory } from '../../redux/slices/filterSlice';
 import styles from './Sort.module.scss';
 
-const sortNameRu = [
-	{ name: 'популярности (A-Z)', sortProperty: 'rating' },
-	{ name: 'популярности (Z-A)', sortProperty: '-rating' },
-	{ name: 'цене (A-Z)', sortProperty: 'price' },
-	{ name: 'цене (Z-A)', sortProperty: '-price' },
-	{ name: 'алфавиту (A-Z)', sortProperty: 'category' },
-	{ name: 'алфавиту (Z-A)', sortProperty: '-category' },
-];
-const sortNameUa = [
-	{ name: 'популярності (A-Z)', sortProperty: 'rating' },
-	{ name: 'популярності (Z-A)', sortProperty: '-rating' },
-	{ name: 'ціні (A-Z)', sortProperty: 'price' },
-	{ name: 'ціні (Z-A)', sortProperty: '-price' },
-	{ name: 'алфавіту (A-Z)', sortProperty: 'category' },
-	{ name: 'алфавіту (Z-A)', sortProperty: '-category' },
-];
+
 
 function Sort({ isUkraine }) {
 	const {sortType} = useSelector(state=> state.filter);
 	const dispatch = useDispatch();
 	const [isSHow, setIsShow] = useState(false);
-	const sortName = isUkraine ? sortNameUa : sortNameRu;
+	const sortName = isUkraine ? SORT__NAME_UA : SORT__NAME_RU;
 	const handleToggleVisible = () => {
 		setIsShow((prev) => !prev);
 	};

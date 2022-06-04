@@ -1,12 +1,10 @@
-import React, { useContext, useState } from 'react';
+import React, {  useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { v4 as uuidv4 } from 'uuid';
-import { Context } from '../../context';
 import { addToCart } from '../../redux/slices/cartSlice';
 import styles from './PizzasBlock.module.scss';
+import { CURRENT__CURRENCY, PIZZAS__TYPE} from '../../pizzasType'
 
-const pizzasTypesRus = ['тонкое', 'традиционное', 'толстое'];
-const pizzasTypesUkr = ['тонке', 'традиційне', 'товсте'];
 
 function PizzasBlock({ id, imageUrl, title, types, sizes, price }) {
   //State
@@ -17,7 +15,7 @@ function PizzasBlock({ id, imageUrl, title, types, sizes, price }) {
   // const { isUkraine } = useContext(Context);
   //Redux
   const { isUkraine } = useSelector((state) => state.language);
-  const { cartValue } = useSelector((state) => state.cart);
+  // const { cartValue } = useSelector((state) => state.cart);
   const dispatch = useDispatch();
   return (
     <>
@@ -31,7 +29,7 @@ function PizzasBlock({ id, imageUrl, title, types, sizes, price }) {
                 className={isActiveType === index ? 'active' : ''}
                 onClick={() => setIsActiveType(index)}
                 key={uuidv4()}>
-                {isUkraine ? pizzasTypesUkr[type] : pizzasTypesRus[type]}
+                {isUkraine ? PIZZAS__TYPE.ukr[type] : PIZZAS__TYPE.ru[type]}
               </li>
             ))}
           </ul>
@@ -49,7 +47,7 @@ function PizzasBlock({ id, imageUrl, title, types, sizes, price }) {
         </div>
         <div className="pizza-block__bottom">
           <div className="pizza-block__price">
-            {isUkraine ? 'від' : 'от'} {price} {isUkraine ? '₴' : '₽'}
+            {isUkraine ? 'від' : 'от'} {price} {isUkraine ? CURRENT__CURRENCY.ukr : CURRENT__CURRENCY.ru}
           </div>
           <div
             className="button button--outline button--add"

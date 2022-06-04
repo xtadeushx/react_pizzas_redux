@@ -2,6 +2,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import LogoImg from '../../assets/img/pizza-logo.svg';
+import { CURRENT__CURRENCY } from '../../pizzasType';
 import Buttons from '../buttons';
 import Search from '../search/idex';
 import styles from './Header.module.scss';
@@ -31,7 +32,7 @@ function Header() {
           <Buttons isUkraine={isUkraine} />
           <div className="header__cart">
             <Link to="/cart" className="button button--cart">
-              <span>{totalBill} {isUkraine ? '₴' : '₽'}</span>
+              <span>{totalBill} {isUkraine ? CURRENT__CURRENCY.ukr : CURRENT__CURRENCY.ru}</span>
               <div className="button__delimiter"></div>
               <svg
                 width="18"

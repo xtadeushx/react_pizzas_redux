@@ -3,12 +3,9 @@ import React, { useCallback, useContext, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
 
 import { Context } from '../../context';
+import { LANGUAGE__SEARCH } from '../../pizzasType';
 import styles from './Search.module.scss';
 
-const languageSearch = {
-  ru: 'поиск пицы...',
-  ua: 'пошук пици...',
-};
 
 function Search() {
   // Redux
@@ -48,7 +45,7 @@ function Search() {
       <input
         type="text"
         className={styles.input}
-        placeholder={isUkraine ? languageSearch.ua : languageSearch.ru}
+        placeholder={isUkraine ? LANGUAGE__SEARCH.ua : LANGUAGE__SEARCH.ru}
         value={value}
         onChange={onChangeInput}
         ref={input}
