@@ -7,6 +7,8 @@ const categoriesRu = ['Все', 'Мясные 🥩', 'Вегетарианска
 const categoriesUa = ['Всі', "М'ясні 🥩", 'Вегетаріанська 🌱', 'Гриль (BBQ)', 'Гострі', 'Закриті'];
 
 function Categories({ isUkraine }) {
+  const { status } = useSelector((state) => state.pizza);
+
   const { categoryId } = useSelector((state) => state.filter);
   const dispatch = useDispatch();
 
@@ -19,7 +21,9 @@ function Categories({ isUkraine }) {
           <li
             className={categoryId === index ? 'active' : ''}
             key={uuidv4()}
-            onClick={() => dispatch(changeCategory(index))}>
+            onClick={() => dispatch(changeCategory(index))}
+            disable={status !== 'resolved'}
+            disabled={status === 'resolved' || status === 'rejected'}>
             {category}
           </li>
         ))}

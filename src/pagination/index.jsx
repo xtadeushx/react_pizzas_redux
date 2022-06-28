@@ -1,8 +1,10 @@
 import React from 'react';
 import ReactPaginate from 'react-paginate';
+import { useSelector } from 'react-redux';
 import styles from './Pagination.module.scss'
 
 function Pagination({ onChangePage}) {
+  const {  status } = useSelector((state) => state.pizza);
   return (
     <ReactPaginate className={styles.root}
     breakLabel="..."
@@ -12,7 +14,7 @@ function Pagination({ onChangePage}) {
     pageCount={3}
     previousLabel="<"
     renderOnZeroPageCount={null}
-  />
+    disabled={status === 'resolved' || status === 'rejected'}  />
   )
 }
 
